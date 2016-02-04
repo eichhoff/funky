@@ -1,0 +1,482 @@
+<?xml version="1.0"?>
+
+<ruleset xmlns="http://www.iris.uni-stuttgart.de/eichhojn/FUNKY">
+
+	<rule id="rule-3">
+		<left>
+			<GET_FUNCTIONS>
+				<node-var id="node-1"/>
+				<function><function-const>IMPORT</function-const></function>
+				<flow><flow-const>HUMANENERGY</flow-const></flow>
+				<flow><flow-const>HUMANENERGY</flow-const></flow>
+			</GET_FUNCTIONS>
+			<WITHOUT_INCOMING_FLOW>
+				<node-var id="node-1"/>
+				<flow><flow-const>HUMAN</flow-const></flow>
+			</WITHOUT_INCOMING_FLOW>
+			<GET_FUNCTIONS>
+				<node-var id="node-2"/>
+				<function><function-const>IMPORT</function-const></function>
+				<flow><flow-const>HUMAN</flow-const></flow>
+				<flow><flow-const>HUMAN</flow-const></flow>
+			</GET_FUNCTIONS>
+		</left>
+		<right>
+			<ADD_FLOW>
+				<node-var id="node-2"/>
+				<node-var id="node-1"/>
+				<flow><flow-const>HUMAN</flow-const></flow>
+			</ADD_FLOW>
+			<ADD_OUTGOING_NONTERMINAL>
+				<node-var id="node-2"/>
+				<node-var id="node-3"/>
+				<flow><flow-const>HUMAN</flow-const></flow>
+			</ADD_OUTGOING_NONTERMINAL>
+		</right>
+	</rule>
+	
+	<rule id="rule-4">
+		<left>
+			<GET_FUNCTIONS>
+				<node-var id="node-1"/>
+				<function><function-const>IMPORT</function-const></function>
+				<flow><flow-const>HUMANENERGY</flow-const></flow>
+				<flow><flow-const>HUMANENERGY</flow-const></flow>
+			</GET_FUNCTIONS>
+			<WITHOUT_OUTGOING_FLOW>
+				<node-var id="node-1"/>
+				<flow><flow-const>HUMANENERGY</flow-const></flow>
+			</WITHOUT_OUTGOING_FLOW>
+		</left>
+		<right>
+			<ADD_FUNCTION>
+				<node-var id="node-2"/>
+				<function><function-const>TRANSFER_TRANSMIT</function-const></function>
+				<flow><flow-const>HUMANENERGY</flow-const></flow>
+				<flow><flow-const>HUMANENERGY</flow-const></flow>
+			</ADD_FUNCTION>
+			<ADD_FLOW>
+				<node-var id="node-1"/>
+				<node-var id="node-2"/>
+				<flow><flow-const>HUMANENERGY</flow-const></flow>
+			</ADD_FLOW>
+			<ADD_OUTGOING_NONTERMINAL>
+				<node-var id="node-2"/>
+				<node-var id="node-3"/>
+				<flow><flow-const>HUMANENERGY</flow-const></flow>
+			</ADD_OUTGOING_NONTERMINAL>
+		</right>
+	</rule>
+
+	<rule id="rule-5">
+		<left>
+			<GET_FUNCTIONS>
+				<node-var id="node-1"/>
+				<function><function-const>IMPORT</function-const></function>
+				<flow><flow-const>ELECTRICALENERGY</flow-const></flow>
+				<flow><flow-const>ELECTRICALENERGY</flow-const></flow>
+			</GET_FUNCTIONS>
+			<WITHOUT_OUTGOING_FLOW>
+				<node-var id="node-1"/>
+				<flow><flow-const>ELECTRICALENERGY</flow-const></flow>
+			</WITHOUT_OUTGOING_FLOW>
+		</left>
+		<right>
+			<ADD_FUNCTION>
+				<node-var id="node-2"/>
+				<function><function-const>TRANSFER_TRANSMIT</function-const></function>
+				<flow><flow-const>ELECTRICALENERGY</flow-const></flow>
+				<flow><flow-const>ELECTRICALENERGY</flow-const></flow>
+			</ADD_FUNCTION>
+			<ADD_FLOW>
+				<node-var id="node-1"/>
+				<node-var id="node-2"/>
+				<flow><flow-const>ELECTRICALENERGY</flow-const></flow>
+			</ADD_FLOW>
+			<ADD_FUNCTION>
+				<node-var id="node-3"/>
+				<function><function-const>ACTUATE</function-const></function>
+				<flow><flow-const>ELECTRICALENERGY</flow-const></flow>
+				<flow><flow-const>ELECTRICALENERGY</flow-const></flow>
+			</ADD_FUNCTION>
+			<ADD_FLOW>
+				<node-var id="node-2"/>
+				<node-var id="node-3"/>
+				<flow><flow-const>ELECTRICALENERGY</flow-const></flow>
+			</ADD_FLOW>
+		</right>
+	</rule>
+
+	<rule id="rule-6">
+		<left>
+			<GET_FUNCTIONS>
+				<node-var id="node-1"/>
+				<function><function-const>TRANSFER_TRANSMIT</function-const></function>
+				<flow><flow-const>HUMANENERGY</flow-const></flow>
+				<flow><flow-const>HUMANENERGY</flow-const></flow>
+			</GET_FUNCTIONS>
+			<GET_FUNCTIONS>
+				<node-var id="node-2"/>
+				<function><function-const>ACTUATE</function-const></function>
+				<flow><flow-const>ELECTRICALENERGY</flow-const></flow>
+				<flow><flow-const>ELECTRICALENERGY</flow-const></flow>
+			</GET_FUNCTIONS>
+			<WITHOUT_INCOMING_FLOW>
+				<node-var id="node-2"/>
+				<flow><flow-const>HUMANENERGY</flow-const></flow>
+			</WITHOUT_INCOMING_FLOW>
+		</left>
+		<right>
+			<ADD_FLOW>
+				<node-var id="node-1"/>
+				<node-var id="node-2"/>
+				<flow><flow-const>HUMANENERGY</flow-const></flow>
+			</ADD_FLOW>
+		</right>
+	</rule>
+
+	<rule id="rule-16">
+		<left>
+			<GET_GAPS>
+				<node-var id="node-1"/>
+				<node-var id="node-2"/>
+				<flow><flow-var id="flow-1"/></flow>
+			</GET_GAPS>
+		</left>
+		<right>
+			<ADD_FLOW>
+				<node-var id="node-1"/>
+				<node-var id="node-2"/>
+				<flow><flow-var id="flow-1"/></flow>
+			</ADD_FLOW>
+		</right>
+	</rule>
+
+	<rule id="rule-17">
+		<left>
+			<CHOICE>
+				<OPTION>
+					<GET_FUNCTIONS>
+						<node-var id="node-1"/>
+						<function/>
+						<flow/>
+						<flow><flow-const>ELECTRICALENERGY</flow-const></flow>
+					</GET_FUNCTIONS>
+					<WITHOUT_OUTGOING_FLOW>
+						<node-var id="node-1"/>
+						<flow><flow-const>ELECTRICALENERGY</flow-const></flow>
+					</WITHOUT_OUTGOING_FLOW>
+				</OPTION>
+				<OPTION>
+					<USE_OUTGOING_NONTERMINALS>
+						<node-var id="node-1"/>
+						<node-var id="node-99"/>
+						<flow><flow-const>ELECTRICALENERGY</flow-const></flow>
+					</USE_OUTGOING_NONTERMINALS>
+				</OPTION>
+			</CHOICE>
+			<CHOICE>
+				<OPTION>
+					<GET_FUNCTIONS>
+						<node-var id="node-4"/>
+						<function/>
+						<flow><flow-var id="flow-1"/></flow>
+						<flow/>
+					</GET_FUNCTIONS>
+					<WITHOUT_INCOMING_FLOW>
+						<node-var id="node-4"/>
+						<flow><flow-var id="flow-1"/></flow>
+					</WITHOUT_INCOMING_FLOW>
+				</OPTION>
+				<OPTION>
+					<USE_INCOMING_NONTERMINALS>
+						<node-var id="node-98"/>
+						<node-var id="node-4"/>
+						<flow><flow-var id="flow-1"/></flow>
+					</USE_INCOMING_NONTERMINALS>
+				</OPTION>
+			</CHOICE>
+			<NOT_EQUAL>
+				<flow><flow-var id="flow-1"/></flow>
+				<flow><flow-const>ELECTRICALENERGY</flow-const></flow>
+			</NOT_EQUAL>
+			<RELATED_LABELS>
+				<flow><flow-var id="flow-1"/></flow>
+				<flow><flow-const>ENERGY</flow-const></flow>
+			</RELATED_LABELS>
+		</left>
+		<right>
+			<ADD_FUNCTION>
+				<node-var id="node-2"/>
+				<function><function-const>CONVERT</function-const></function>
+				<flow><flow-const>ELECTRICALENERGY</flow-const></flow>
+				<flow><flow-var id="flow-1"/></flow>
+			</ADD_FUNCTION>
+			<ADD_FUNCTION>
+				<node-var id="node-3"/>
+				<function><function-const>TRANSFER_TRANSMIT</function-const></function>
+				<flow><flow-var id="flow-1"/></flow>
+				<flow><flow-var id="flow-1"/></flow>
+			</ADD_FUNCTION>
+			<ADD_FLOW>
+				<node-var id="node-1"/>
+				<node-var id="node-2"/>
+				<flow><flow-const>ELECTRICALENERGY</flow-const></flow>
+			</ADD_FLOW>
+			<ADD_FLOW>
+				<node-var id="node-2"/>
+				<node-var id="node-3"/>
+				<flow><flow-var id="flow-1"/></flow>
+			</ADD_FLOW>
+			<ADD_FLOW>
+				<node-var id="node-3"/>
+				<node-var id="node-4"/>
+				<flow><flow-var id="flow-1"/></flow>
+			</ADD_FLOW>
+		</right>
+	</rule>
+
+	<rule id="rule-20">
+		<left>
+			<GET_FUNCTIONS>
+				<node-var id="node-1"/>
+				<function><function-const>EXPORT</function-const></function>
+				<flow><flow-var id="flow-1"/></flow>
+				<flow><flow-var id="flow-1"/></flow>
+			</GET_FUNCTIONS>
+			<WITHOUT_INCOMING_FLOW>
+				<node-var id="node-1"/>
+				<flow><flow-var id="flow-1"/></flow>
+			</WITHOUT_INCOMING_FLOW>
+			<HAS_LABEL>
+				<node-var id="node-1"/>
+				<other>REACTION</other>
+			</HAS_LABEL>
+		</left>
+		<right>
+			<ADD_FUNCTION>
+				<node-var id="node-2"/>
+				<function><function-const>CHANGE_DECREMENT</function-const></function>
+				<flow><flow-var id="flow-1"/></flow>
+				<flow><flow-var id="flow-1"/></flow>
+			</ADD_FUNCTION>
+			<ADD_LABEL>
+				<node-var id="node-2"/>
+				<other>REACTION</other>
+			</ADD_LABEL>
+			<ADD_FLOW>
+				<node-var id="node-2"/>
+				<node-var id="node-1"/>
+				<flow><flow-var id="flow-1"/></flow>
+			</ADD_FLOW>
+		</right>
+	</rule>
+
+	<rule id="rule-24">
+		<left>
+			<GET_FUNCTIONS>
+				<node-var id="node-1"/>
+				<function><function-const>IMPORT</function-const></function>
+				<flow><flow-const>SOLID</flow-const></flow>
+				<flow><flow-const>SOLID</flow-const></flow>
+			</GET_FUNCTIONS>
+			<WITHOUT_OUTGOING_FLOW>
+				<node-var id="node-1"/>
+				<flow><flow-const>SOLID</flow-const></flow>
+			</WITHOUT_OUTGOING_FLOW>
+		</left>
+		<right>
+			<ADD_FUNCTION>
+				<node-var id="node-2"/>
+				<function><function-const>POSITION</function-const></function>
+				<flow><flow-const>SOLID</flow-const></flow>
+				<flow><flow-const>SOLID</flow-const></flow>
+			</ADD_FUNCTION>
+			<ADD_FLOW>
+				<node-var id="node-1"/>
+				<node-var id="node-2"/>
+				<flow><flow-const>SOLID</flow-const></flow>
+			</ADD_FLOW>
+		</right>
+	</rule>
+	
+	<rule id="rule-25">
+		<left>
+			<GET_FUNCTIONS>
+				<node-var id="node-1"/>
+				<function><function-const>EXPORT</function-const></function>
+				<flow><flow-var id="flow-1"/></flow>
+				<flow><flow-var id="flow-1"/></flow>
+			</GET_FUNCTIONS>
+			<WITHOUT_INCOMING_FLOW>
+				<node-var id="node-1"/>
+				<flow><flow-var id="flow-1"/></flow>
+			</WITHOUT_INCOMING_FLOW>
+			<RELATED_LABELS>
+				<flow><flow-var id="flow-1"/></flow>
+				<flow><flow-const>MATERIAL</flow-const></flow>
+			</RELATED_LABELS>
+		</left>
+		<right>
+			<ADD_FUNCTION>
+				<node-var id="node-2"/>
+				<function><function-const>GUIDE</function-const></function>
+				<flow><flow-var id="flow-1"/></flow>
+				<flow><flow-var id="flow-1"/></flow>
+			</ADD_FUNCTION>
+			<ADD_FLOW>
+				<node-var id="node-2"/>
+				<node-var id="node-1"/>
+				<flow><flow-var id="flow-1"/></flow>
+			</ADD_FLOW>
+		</right>
+	</rule>
+	
+	<rule id="rule-26">
+		<left>
+			<GET_FUNCTIONS>
+				<node-var id="node-1"/>
+				<function><function-const>SEPARATE</function-const></function>
+				<flow><flow-const>SOLID</flow-const></flow>
+				<flow><flow-const>SOLID</flow-const></flow>
+			</GET_FUNCTIONS>
+			<WITHOUT_INCOMING_FLOW>
+				<node-var id="node-1"/>
+				<flow><flow-const>SOLID</flow-const></flow>
+			</WITHOUT_INCOMING_FLOW>
+			<WITHOUT_INCOMING_FLOW>
+				<node-var id="node-1"/>
+				<flow><flow-const>MECHANICALENERGY</flow-const></flow>
+			</WITHOUT_INCOMING_FLOW>
+		</left>
+		<right>
+			<ADD_INCOMING_NONTERMINAL>
+				<node-var id="node-2"/>
+				<node-var id="node-1"/>
+				<flow><flow-const>MECHANICALENERGY</flow-const></flow>
+			</ADD_INCOMING_NONTERMINAL>
+			<ADD_OUTGOING_NONTERMINAL>
+				<node-var id="node-1"/>
+				<node-var id="node-3"/>
+				<flow><flow-const>MECHANICALENERGY</flow-const></flow>
+			</ADD_OUTGOING_NONTERMINAL>
+			<ADD_LABEL>
+				<node-var id="node-3"/>
+				<other>REACTION</other>
+			</ADD_LABEL>
+			<ADD_OUTGOING_NONTERMINAL>
+				<node-var id="node-1"/>
+				<node-var id="node-4"/>
+				<flow><flow-const>SOLID</flow-const></flow>
+			</ADD_OUTGOING_NONTERMINAL>
+			<ADD_OUTGOING_NONTERMINAL>
+				<node-var id="node-1"/>
+				<node-var id="node-5"/>
+				<flow><flow-const>SOLID</flow-const></flow>
+			</ADD_OUTGOING_NONTERMINAL>
+		</right>
+	</rule>
+	
+	<rule id="rule-27">
+		<left>
+			<GET_FUNCTIONS>
+				<node-var id="node-1"/>
+				<function><function-const>SEPARATE</function-const></function>
+				<flow><flow-const>SOLID</flow-const></flow>
+				<flow><flow-const>SOLID</flow-const></flow>
+			</GET_FUNCTIONS>
+			<WITHOUT_INCOMING_FLOW>
+				<node-var id="node-1"/>
+				<flow><flow-const>SOLID</flow-const></flow>
+			</WITHOUT_INCOMING_FLOW>
+		</left>
+		<right>
+			<ADD_FUNCTION>
+				<node-var id="node-2"/>
+				<function><function-const>SECURE</function-const></function>
+				<flow><flow-const>SOLID</flow-const></flow>
+				<flow><flow-const>SOLID</flow-const></flow>
+			</ADD_FUNCTION>
+			<ADD_FLOW>
+				<node-var id="node-2"/>
+				<node-var id="node-1"/>
+				<flow><flow-const>SOLID</flow-const></flow>
+			</ADD_FLOW>
+		</right>
+	</rule>
+	
+	<rule id="rule-29">
+		<left>
+			<CHOICE>
+				<OPTION>
+					<GET_FUNCTIONS>
+						<node-var id="node-1"/>
+						<function/>
+						<flow><flow-const>MECHANICALENERGY</flow-const></flow>
+						<flow/>
+					</GET_FUNCTIONS>
+					<WITHOUT_INCOMING_FLOW>
+						<node-var id="node-1"/>
+						<flow><flow-const>MECHANICALENERGY</flow-const></flow>
+					</WITHOUT_INCOMING_FLOW>
+				</OPTION>
+				<OPTION>
+					<USE_INCOMING_NONTERMINALS>
+						<node-var id="node-99"/>
+						<node-var id="node-1"/>
+						<flow><flow-const>MECHANICALENERGY</flow-const></flow>
+					</USE_INCOMING_NONTERMINALS>
+				</OPTION>
+			</CHOICE>
+			<HAS_LABEL>
+				<node-var id="node-1"/>
+				<other>PRIMARY</other>
+			</HAS_LABEL>
+		</left>
+		<right>
+			<ADD_FUNCTION>
+				<node-var id="node-2"/>
+				<function><function-const>CHANGE</function-const></function>
+				<flow><flow-const>MECHANICALENERGY</flow-const></flow>
+				<flow><flow-const>MECHANICALENERGY</flow-const></flow>
+			</ADD_FUNCTION>
+			<ADD_FLOW>
+				<node-var id="node-2"/>
+				<node-var id="node-1"/>
+				<flow><flow-const>MECHANICALENERGY</flow-const></flow>
+			</ADD_FLOW>
+		</right>
+	</rule>
+	
+	<rule id="rule-33">
+		<left>
+			<USE_OUTGOING_NONTERMINALS>
+				<node-var id="node-1"/>
+				<node-var id="node-99"/>
+				<flow><flow-var id="flow-1"/></flow>
+			</USE_OUTGOING_NONTERMINALS>
+			<HAS_LABEL>
+				<node-var id="node-99"/>
+				<other>REACTION</other>
+			</HAS_LABEL>
+			<GET_FUNCTIONS>
+				<node-var id="node-2"/>
+				<function><function-const>CHANGE_DECREMENT</function-const></function>
+				<flow><flow-var id="flow-1"/></flow>
+				<flow><flow-var id="flow-1"/></flow>
+			</GET_FUNCTIONS>
+			<HAS_LABEL>
+				<node-var id="node-2"/>
+				<other>REACTION</other>
+			</HAS_LABEL>
+		</left>
+		<right>
+			<ADD_FLOW>
+				<node-var id="node-1"/>
+				<node-var id="node-2"/>
+				<flow><flow-var id="flow-1"/></flow>
+			</ADD_FLOW>
+		</right>
+	</rule>
+	
+</ruleset>

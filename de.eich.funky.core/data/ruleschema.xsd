@@ -1,0 +1,343 @@
+<?xml version="1.0"?>
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns="http://www.iris.uni-stuttgart.de/eichhojn/FUNKY"      
+	targetNamespace="http://www.iris.uni-stuttgart.de/eichhojn/FUNKY"
+	elementFormDefault="qualified">
+
+
+<!-- ELEMENTS USED FOR DECLARING NODES, FUNCTIONS, FLOWS AND ADDITIONAL DATA -->
+
+<xs:element name="node-var">
+  <xs:complexType>
+    <xs:attribute name="id" type="xs:string" use="required"/>
+  </xs:complexType>
+</xs:element>
+
+<xs:element name="function-var">
+  <xs:complexType>
+    <xs:attribute name="id" type="xs:string" use="required"/>
+  </xs:complexType>
+</xs:element>
+
+<xs:element name="flow-var">
+  <xs:complexType>
+    <xs:attribute name="id" type="xs:string" use="required"/>
+  </xs:complexType>
+</xs:element>
+
+<xs:element name="function-const" type="xs:string"/>
+
+<xs:element name="flow-const" type="xs:string"/>
+
+<xs:element name="function">
+  <xs:complexType>
+    <xs:choice>
+      <xs:element ref="function-var" minOccurs="0"/>
+      <xs:element ref="function-const" minOccurs="0"/>
+    </xs:choice>
+  </xs:complexType>
+</xs:element>
+
+<xs:element name="flow">
+  <xs:complexType>
+    <xs:choice>
+      <xs:element ref="flow-var" minOccurs="0"/>
+      <xs:element ref="flow-const" minOccurs="0"/>
+    </xs:choice>
+  </xs:complexType>
+</xs:element>
+
+<xs:group name="node-var-pair">
+	<xs:sequence>
+		<xs:element ref="node-var"/>
+		<xs:element ref="node-var"/>
+	</xs:sequence>
+</xs:group>
+
+<xs:group name="function-pair">
+	<xs:sequence>
+		<xs:element ref="function"/>
+		<xs:element ref="function"/>
+	</xs:sequence>
+</xs:group>
+			
+<xs:group name="flow-pair">
+	<xs:sequence>
+		<xs:element ref="flow"/>
+		<xs:element ref="flow"/>
+	</xs:sequence>
+</xs:group>
+
+<xs:element name="other" type="xs:string"/>
+
+
+<!-- ELEMENTS TO BE USED ON LEFT-HAND SIDE OF RULE -->
+
+<xs:element name="GET_FUNCTIONS">
+	<xs:complexType>
+		<xs:sequence>
+			<xs:element ref="node-var"/>
+			<xs:element ref="function"/>
+			<xs:element ref="flow"/>
+			<xs:element ref="flow"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:element>
+
+<xs:element name="GET_GAPS">
+	<xs:complexType>
+		<xs:sequence>
+			<xs:element ref="node-var"/>
+			<xs:element ref="node-var"/>
+			<xs:element ref="flow"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:element>
+
+<xs:element name="WITHOUT_OUTGOING_FLOW">
+	<xs:complexType>
+		<xs:sequence>
+			<xs:element ref="node-var"/>
+			<xs:element ref="flow"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:element>
+
+<xs:element name="WITHOUT_INCOMING_FLOW">
+	<xs:complexType>
+		<xs:sequence>
+			<xs:element ref="node-var"/>
+			<xs:element ref="flow"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:element>
+
+<xs:element name="USE_OUTGOING_NONTERMINALS">
+	<xs:complexType>
+		<xs:sequence>
+			<xs:element ref="node-var"/>
+			<xs:element ref="node-var"/>
+			<xs:element ref="flow"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:element>
+
+<xs:element name="USE_INCOMING_NONTERMINALS">
+	<xs:complexType>
+		<xs:sequence>
+			<xs:element ref="node-var"/>
+			<xs:element ref="node-var"/>
+			<xs:element ref="flow"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:element>
+
+<xs:element name="NOT_EQUAL">
+	<xs:complexType>
+		<xs:choice>
+			<xs:group ref="node-var-pair"/>
+			<xs:group ref="function-pair"/>
+			<xs:group ref="flow-pair"/>
+		</xs:choice>
+	</xs:complexType>
+</xs:element>
+
+<xs:element name="HAS_LABEL">
+	<xs:complexType>
+		<xs:sequence>
+			<xs:element ref="node-var"/>
+			<xs:element ref="other"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:element>
+
+<xs:element name="RELATED_LABELS">
+	<xs:complexType>
+		<xs:choice>
+			<xs:group ref="function-pair"/>
+			<xs:group ref="flow-pair"/>
+		</xs:choice>
+	</xs:complexType>
+</xs:element>
+
+<xs:element name="EXTERNAL_HANDLER">
+	<xs:complexType>
+		<xs:sequence>
+			<xs:element ref="other"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:element>
+
+<xs:group name="left-operations-modifiers">
+	<xs:choice>
+		<xs:element ref="WITHOUT_OUTGOING_FLOW"/>
+		<xs:element ref="WITHOUT_INCOMING_FLOW"/>
+		<xs:element ref="NOT_EQUAL"/>
+		<xs:element ref="HAS_LABEL"/>
+		<xs:element ref="RELATED_LABELS"/>
+		<xs:element ref="EXTERNAL_HANDLER"/>
+	</xs:choice>
+</xs:group>
+
+<xs:group name="left-operations-a">
+	<xs:sequence>
+		<xs:element ref="GET_FUNCTIONS"/>
+		<xs:group ref="left-operations-modifiers" minOccurs="0" maxOccurs="unbounded"/>
+	</xs:sequence>
+</xs:group>
+
+<xs:group name="left-operations-b">
+	<xs:sequence>
+		<xs:element ref="USE_OUTGOING_NONTERMINALS"/>
+		<xs:group ref="left-operations-modifiers" minOccurs="0" maxOccurs="unbounded"/>
+	</xs:sequence>
+</xs:group>
+
+<xs:group name="left-operations-c">
+	<xs:sequence>
+		<xs:element ref="USE_INCOMING_NONTERMINALS"/>
+		<xs:group ref="left-operations-modifiers" minOccurs="0" maxOccurs="unbounded"/>
+	</xs:sequence>
+</xs:group>
+
+<xs:group name="left-operations-d">
+	<xs:sequence>
+		<xs:element ref="GET_GAPS"/>
+		<xs:group ref="left-operations-modifiers" minOccurs="0" maxOccurs="unbounded"/>
+	</xs:sequence>
+</xs:group>
+
+<xs:group name="left-operations-e">
+	<xs:sequence>
+		<xs:element name="CHOICE">
+			<xs:complexType>
+				<xs:sequence>
+					<xs:element name="OPTION" minOccurs="2" maxOccurs="unbounded">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:group ref="left-operations-without-choice" maxOccurs="unbounded"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:complexType>
+		</xs:element>
+		<xs:group ref="left-operations-modifiers" minOccurs="0" maxOccurs="unbounded"/>
+	</xs:sequence>
+</xs:group>
+
+<xs:group name="left-operations-without-choice">
+	<xs:choice>
+		<xs:group ref="left-operations-a"/>
+		<xs:group ref="left-operations-b"/>
+		<xs:group ref="left-operations-c"/>
+		<xs:group ref="left-operations-d"/>
+	</xs:choice>
+</xs:group>
+
+<xs:group name="left-operations-with-choice">
+	<xs:choice>
+		<xs:group ref="left-operations-a"/>
+		<xs:group ref="left-operations-b"/>
+		<xs:group ref="left-operations-c"/>
+		<xs:group ref="left-operations-d"/>
+		<xs:group ref="left-operations-e"/>
+	</xs:choice>
+</xs:group>
+
+
+<!-- ELEMENTS TO BE USED ON RIGHT-HAND SIDE OF RULE -->
+
+<xs:element name="ADD_FUNCTION">
+	<xs:complexType>
+		<xs:sequence>
+			<xs:element ref="node-var"/>
+			<xs:element ref="function"/>
+			<xs:element ref="flow"/>
+			<xs:element ref="flow"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:element>
+
+<xs:element name="ADD_OUTGOING_NONTERMINAL">
+	<xs:complexType>
+		<xs:sequence>
+			<xs:element ref="node-var"/>
+			<xs:element ref="node-var"/>
+			<xs:element ref="flow"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:element>
+
+<xs:element name="ADD_INCOMING_NONTERMINAL">
+	<xs:complexType>
+		<xs:sequence>
+			<xs:element ref="node-var"/>
+			<xs:element ref="node-var"/>
+			<xs:element ref="flow"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:element>
+
+<xs:element name="ADD_FLOW">
+	<xs:complexType>
+		<xs:sequence>
+			<xs:element ref="node-var"/>
+			<xs:element ref="node-var"/>
+			<xs:element ref="flow"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:element>
+
+<xs:element name="ADD_LABEL">
+	<xs:complexType>
+		<xs:sequence>
+			<xs:element ref="node-var"/>
+			<xs:element ref="other"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:element>
+
+<xs:group name="right-operations">
+	<xs:choice>
+		<xs:element ref="ADD_FUNCTION" maxOccurs="unbounded"/>
+		<xs:element ref="ADD_FLOW" maxOccurs="unbounded"/>
+		<xs:element ref="ADD_LABEL" maxOccurs="unbounded"/>
+		<xs:element ref="ADD_OUTGOING_NONTERMINAL" maxOccurs="unbounded"/>
+		<xs:element ref="ADD_INCOMING_NONTERMINAL" maxOccurs="unbounded"/>
+	</xs:choice>
+</xs:group>
+
+
+<!-- THE RULESET -->
+
+<xs:element name="ruleset">
+	<xs:complexType>
+		<xs:sequence>
+			<xs:element name="rule" maxOccurs="unbounded">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="left">
+							<xs:complexType>
+								<xs:sequence>
+									<xs:group ref="left-operations-with-choice" maxOccurs="unbounded"/>	 
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="right">
+							<xs:complexType>
+								<xs:sequence>
+									<xs:group ref="right-operations" maxOccurs="unbounded"/>	 
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+					<xs:attribute name="id" type="xs:ID" use="required"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+</xs:element>
+
+</xs:schema>
